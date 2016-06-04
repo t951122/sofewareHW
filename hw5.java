@@ -3,7 +3,7 @@ import javax.swing.border.*;
 import javax.swing.event.*;
 import java.beans.*;
 import java.awt.*;
-import java.awt.event.*; //¤Ş¥Î³B²z¨Æ¥óªºevent®M¥ó
+import java.awt.event.*; //å¼•ç”¨è™•ç†äº‹ä»¶çš„eventå¥—ä»¶
 import java.util.*;
 import java.util.Timer;
 
@@ -26,7 +26,7 @@ public class hw5 {
 				checkout.setEnabled(true);
 				weekday.setEnabled(false);
 				weekend.setEnabled(true);
-				money.setText("»ù¿ú:¤j¤H268¤¸,¤p«Ä120¤¸");
+				money.setText("åƒ¹éŒ¢:å¤§äºº268å…ƒ,å°å­©120å…ƒ");
 				checkout.requestFocusInWindow();
 			}
 			else if(source.getActionCommand().equals("weekends")){
@@ -35,7 +35,7 @@ public class hw5 {
 				checkout.setEnabled(true);
 				weekday.setEnabled(true);
 				weekend.setEnabled(false);
-				money.setText("»ù¿ú:¤j¤H368¤¸,¤p«Ä150¤¸,10%ªA°È¶O");
+				money.setText("åƒ¹éŒ¢:å¤§äºº368å…ƒ,å°å­©150å…ƒ,10%æœå‹™è²»");
 				checkout.requestFocusInWindow();
 			}
 		}
@@ -43,17 +43,17 @@ public class hw5 {
 	ActionListener Total = new ActionListener(){
 		int adultnum=0;
 		int childnum=0;
-		int count=0;
 		//boolean zero=true;
 		public void actionPerformed(ActionEvent e){
-			int result=JOptionPane.showConfirmDialog(checkout,"½T©wµ²±b?","½T©w",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+			int result=JOptionPane.showConfirmDialog(checkout,"ç¢ºå®šçµå¸³?","ç¢ºå®š",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 			if(result==JOptionPane.YES_OPTION){
 				adultnum=Integer.parseInt(adult.getText());
 				childnum=Integer.parseInt(child.getText());
+				int count=adultnum+childnum;
 				moneyt=(childnum*moneycd)+(adultnum*moneyad);
 				while((adultnum+childnum)!=0){
 					if((adultnum+childnum)<3){
-						discount.setText("µL§é¦©");
+						discount.setText("ç„¡æŠ˜æ‰£");
 						//total.setText(""+moneytotal);
 						adultnum=0;
 						childnum=0;
@@ -98,17 +98,17 @@ public class hw5 {
 					}
 				}
 				if(weekday.isEnabled()==false){
-					if((adultnum+childnum)<10){
+					if(count<10){
 						moneytotal=moneyt-disad-disch;
 					}
 					else{
 						moneytotal=(int) ((moneyt-disad-disch)*0.95);
 					}
-					price.setText(""+moneyt+"¤¸");
-					total.setText(""+moneytotal+"¤¸");
+					price.setText(""+moneyt+"å…ƒ");
+					total.setText(""+moneytotal+"å…ƒ");
 				}
 				else if(weekend.isEnabled()==false){
-					if((adultnum+childnum)<10){
+					if(count<10){
 						moneytotal=moneyt-disad-disch;
 					}
 					else{
@@ -116,22 +116,22 @@ public class hw5 {
 					}
 					service=(int) (moneytotal*0.1);
 					moneytotal=moneytotal+service;
-					price.setText(""+moneyt+"¤¸");
-					total.setText(""+moneytotal+"¤¸"+"(ªA°È¶O:"+service+"¤¸)");
+					price.setText(""+moneyt+"å…ƒ");
+					total.setText(""+moneytotal+"å…ƒ"+"(æœå‹™è²»:"+service+"å…ƒ)");
 				}
 				System.out.println("disch:"+disch);
 				System.out.println("disad"+disad);
 				if(disad!=0 &&disch==0){
-					discount.setText("¤T¤H¦P¦æ,¤@¤H§K¶O,¤j¤H -"+disad+"¤¸");
+					discount.setText("ä¸‰äººåŒè¡Œ,ä¸€äººå…è²»,å¤§äºº -"+disad+"å…ƒ");
 				}
 				else if(disad==0 &&disch!=0){
-					discount.setText("¤T¤H¦P¦æ,¤@¤H§K¶O(¤p«ÄÀu¥ı),¤p«Ä -"+disch+"¤¸");
+					discount.setText("ä¸‰äººåŒè¡Œ,ä¸€äººå…è²»(å°å­©å„ªå…ˆ),å°å­© -"+disch+"å…ƒ");
 				}
 				else if(disad!=0 &&disch!=0){
-					discount.setText("¤T¤H¦P¦æ,¤@¤H§K¶O(¤p«ÄÀu¥ı),¤j¤H -"+disad+"¤¸"+"¤p«Ä -"+disch+"¤¸");
+					discount.setText("ä¸‰äººåŒè¡Œ,ä¸€äººå…è²»(å°å­©å„ªå…ˆ),å¤§äºº -"+disad+"å…ƒ"+"å°å­© -"+disch+"å…ƒ");
 				}
 				else{
-					discount.setText("µL§é¦©");
+					discount.setText("ç„¡æŠ˜æ‰£");
 				}
 			}
 			
@@ -143,7 +143,7 @@ public class hw5 {
 	};
 	ActionListener Cannel= new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			int result=JOptionPane.showConfirmDialog(checkout,"½T©w¨ú®ø?","½T©w",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+			int result=JOptionPane.showConfirmDialog(checkout,"ç¢ºå®šå–æ¶ˆ?","ç¢ºå®š",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 			if(result==JOptionPane.YES_OPTION){
 				adult.setText("0");
 				child.setText("0");
@@ -166,7 +166,7 @@ public class hw5 {
 					all=false;
 			}
 			if(all==false){
-				JOptionPane.showMessageDialog(input,"½Ğ¿é¤J¼Æ¦r","¿ù»~",JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(input,"è«‹è¼¸å…¥æ•¸å­—","éŒ¯èª¤",JOptionPane.WARNING_MESSAGE);
 				input.setText("");
 			}
 			ck_flag = all;
@@ -183,7 +183,7 @@ public class hw5 {
 			String ck = input.getText();
 			byte w[] = ck.getBytes();
 			if(ck.equals("")){
-				//JOptionPane.showMessageDialog(input, "½Ğ¿é¤J¼Æ¦r","¿ù»~",JOptionPane.WARNING_MESSAGE);
+				//JOptionPane.showMessageDialog(input, "è«‹è¼¸å…¥æ•¸å­—","éŒ¯èª¤",JOptionPane.WARNING_MESSAGE);
 				input.setText("0");
 			}				
 			for(int i = 0 ; i < ck.length() ; i++){
@@ -194,7 +194,7 @@ public class hw5 {
 					all=false;
 			}
 			if(all==false){
-				JOptionPane.showMessageDialog(input, "½Ğ¿é¤J¼Æ¦r","¿ù»~",JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(input, "è«‹è¼¸å…¥æ•¸å­—","éŒ¯èª¤",JOptionPane.WARNING_MESSAGE);
 				input.setText("");
 			}
 		}
@@ -225,32 +225,32 @@ public class hw5 {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		weekday = new JButton("¥­¤é¤¤¤È®É¬q");
-		weekday.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		weekday = new JButton("å¹³æ—¥ä¸­åˆæ™‚æ®µ");
+		weekday.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		weekday.setBounds(10, 33, 151, 23);
 		frame.getContentPane().add(weekday);
 		weekday.setActionCommand("weekdays");
 		weekday.addActionListener(times);
 		weekday.requestFocusInWindow();
-		weekend = new JButton("¥­¤é±ß¤W,©P¥½,¨Ò°²¤é®É¬q");
-		weekend.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		weekend = new JButton("å¹³æ—¥æ™šä¸Š,å‘¨æœ«,ä¾‹å‡æ—¥æ™‚æ®µ");
+		weekend.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		weekend.setBounds(171, 33, 253, 23);
 		frame.getContentPane().add(weekend);
 		weekend.setActionCommand("weekends");
 		weekend.addActionListener(times);
 		
-		JLabel label = new JLabel("¤j¤H");
-		label.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		JLabel label = new JLabel("å¤§äºº");
+		label.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		label.setBounds(20, 84, 46, 20);
 		frame.getContentPane().add(label);
 		
-		JLabel label_1 = new JLabel("¤p«Ä");
-		label_1.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		JLabel label_1 = new JLabel("å°å­©");
+		label_1.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		label_1.setBounds(20, 114, 46, 20);
 		frame.getContentPane().add(label_1);
 		
 		adult = new JTextField();
-		adult.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		adult.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		adult.setBounds(76, 81, 96, 21);
 		frame.getContentPane().add(adult);
 		adult.setColumns(10);
@@ -259,7 +259,7 @@ public class hw5 {
 		adult.setText("0");
 		
 		child = new JTextField();
-		child.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		child.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		child.setBounds(76, 111, 96, 21);
 		frame.getContentPane().add(child);
 		child.setColumns(10);
@@ -267,60 +267,60 @@ public class hw5 {
 		child.addFocusListener(check);
 		child.setText("0");
 		
-		JLabel label_2 = new JLabel("¤H");
-		label_2.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		JLabel label_2 = new JLabel("äºº");
+		label_2.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		label_2.setBounds(196, 84, 46, 20);
 		frame.getContentPane().add(label_2);
 		
-		JLabel label_3 = new JLabel("¤H");
-		label_3.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		JLabel label_3 = new JLabel("äºº");
+		label_3.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		label_3.setBounds(196, 114, 46, 20);
 		frame.getContentPane().add(label_3);
 		
-		JLabel lblTotal = new JLabel("Á`­p:");
-		lblTotal.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		JLabel lblTotal = new JLabel("ç¸½è¨ˆ:");
+		lblTotal.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		lblTotal.setBounds(20, 222, 64, 20);
 		frame.getContentPane().add(lblTotal);
 		
-		JLabel label_4 = new JLabel("§é¦©:");
-		label_4.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		JLabel label_4 = new JLabel("æŠ˜æ‰£:");
+		label_4.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		label_4.setBounds(20, 192, 46, 20);
 		frame.getContentPane().add(label_4);
 		
-		checkout = new JButton("µ²±b");
-		checkout.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		checkout = new JButton("çµå¸³");
+		checkout.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		checkout.setBounds(252, 93, 87, 23);
 		frame.getContentPane().add(checkout);
 		checkout.addActionListener(Total);
 		checkout.setEnabled(false);
 		
 		discount = new JLabel("");
-		discount.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		discount.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		discount.setBounds(76, 192, 378, 20);
 		frame.getContentPane().add(discount);
 		
 		total = new JLabel("");
-		total.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		total.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		total.setBounds(76, 222, 263, 20);
 		frame.getContentPane().add(total);
 		
-		money = new JLabel("³æ»ù:");
-		money.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		money = new JLabel("å–®åƒ¹:");
+		money.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		money.setBounds(20, 252, 301, 29);
 		frame.getContentPane().add(money);
 		
-		cannel = new JButton("¨ú®ø");
+		cannel = new JButton("å–æ¶ˆ");
 		cannel.setBounds(349, 93, 64, 23);
 		frame.getContentPane().add(cannel);
 		cannel.addActionListener(Cannel);
 		
-		JLabel lblNewLabel = new JLabel("­ì»ù:");
-		lblNewLabel.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		JLabel lblNewLabel = new JLabel("åŸåƒ¹:");
+		lblNewLabel.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		lblNewLabel.setBounds(20, 162, 46, 20);
 		frame.getContentPane().add(lblNewLabel);
 		
 		price = new JLabel("");
-		price.setFont(new Font("·s²Ó©úÅé", Font.PLAIN, 18));
+		price.setFont(new Font("æ–°ç´°æ˜é«”", Font.PLAIN, 18));
 		price.setBounds(76, 162, 263, 20);
 		frame.getContentPane().add(price);
 		
